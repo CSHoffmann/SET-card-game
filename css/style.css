@@ -1,4 +1,8 @@
-#menu-view {
+header { /* center header */
+    text-align: center;
+}
+
+#menu-view { /* default font size for menu-view */
     font-size: 12pt; 
 }
 
@@ -10,7 +14,7 @@
     text-align: center;
 }
 
-h2 {
+h2 { /* default for all h2 elements */
     font-size: 16pt;
     text-decoration: underline;
 }
@@ -24,4 +28,8 @@ h2 {
     padding: 8px;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
 }
