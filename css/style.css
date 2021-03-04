@@ -27,6 +27,11 @@ h2 { /* default for all h2 elements */
 
 #start, #main-btn, #refresh {
     padding: 8px;
+    font-size: inherit;
+}
+
+#main-btn, #refresh {
+    font-size: 12pt;
 }
 
 #start { 
