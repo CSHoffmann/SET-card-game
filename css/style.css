@@ -1,0 +1,27 @@
+#menu-view {
+    font-size: 12pt; 
+}
+
+#menu-view article {
+    background-color: #6F77ED;
+    color: white;
+    border: 5pt solid black;
+    border-radius: 0.35em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 16pt;
+    text-decoration: underline;
+}
+
+#start, #dropdown { /* border for start button and time dropdown */
+    border: 2pt solid black;
+}
+
+#start {
+    width: 100px;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
