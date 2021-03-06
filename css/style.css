@@ -55,18 +55,29 @@ h2 { /* default for all h2 elements */
 }
 
 #game {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     border: 5pt solid black;
     border-top: 0pt;
     padding: 20px;
 }
 
 .card { /* layout for set card */
-    width: 220px;
-    height: 95px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
     border: 0.35em solid black;
     border-radius: 1em;
+    width: 220px;
+    height: 95px;
+    margin: 5px 0px;
 }
 
+.shape-image {
+    height: 85%;
+}
 
 .hidden {
     display: none;
