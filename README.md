@@ -1,4 +1,4 @@
-# set-card-game
+# Set Card Game
 This is a web app of the game Set developed with HTML, CSS and JavaScript.
 
 # What is Set?
