@@ -17,10 +17,10 @@
     </header>
 
     <main>
-      <section id="menu-view" class="hidden">
+      <section id="menu-view">
         <article>
           <h2>Choose a Timing Option:</h2>
-          <select id="dropdown">
+          <select id="dropdown" class="button">
             <option value="none">Unlimited</option>
             <option value="60">1 Minute</option>
             <option value="180" selected>3 Minutes</option>
@@ -33,7 +33,7 @@
             <label><input type="radio" name="diff" value="standard" checked/> Standard</label>
           </p>
 
-          <button id="start">Start</button>
+          <button id="start" class="button">Start</button>
         </article>
 
         <section>
@@ -66,10 +66,10 @@
 
       <section id="game-view">
         <article id="details">
-          <button id="main-btn">Back to Main</button>
+          <button id="back" class="button">Back to Main</button>
           <p><strong>Sets Found: </strong><span id="set-count">0</span></p>
           <p><strong>Time: </strong><span id="time">00:00</span></p>
-          <button id="refresh">Refresh Board</button>
+          <button id="refresh" class="button">Refresh Board</button>
         </article>
 
         <div id="game">
