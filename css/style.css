@@ -1,3 +1,8 @@
+body {
+    width: 90vw;
+    margin: auto;
+}
+
 header, #menu-view { /* center header */
     text-align: center;
 }
@@ -19,18 +24,18 @@ h2 { /* default for all h2 elements */
 }
 
 /* start of button styles */
-#start, #dropdown, #main-btn, #refresh {
+.button{
     border: 2pt solid black;
     background-color: white;
 
 }
 
-#start, #main-btn, #refresh {
+#start, #back, #refresh {
     padding: 8px;
     font-size: inherit;
 }
 
-#main-btn, #refresh {
+#back, #refresh {
     font-size: 12pt;
 }
 
