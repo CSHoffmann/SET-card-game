@@ -20,16 +20,10 @@ window.onload = function() {
     }
 
     function startTimer() {
-        /* 
-            get the user selected value of time (in seconds) from the dropdown
-            track two variables, the minutes place and seconds place
-            minute [0, 5] and seconds [0, 59]
-            Special case: if user selectes "unlimited" then the timer starts at 0:00 and increments each second
-        */
        let userTime = document.getElementById("dropdown").value; // user selected time as type string
 
        if (userTime == "none") { // case when user selects unlimted time 
-           countUpTimer();
+           countUpTimer(userTime, displayTime);
        } else { // all other cases (user selects a finite time)
            countDownTimer(userTime, displayTime);
        }
@@ -41,17 +35,30 @@ window.onload = function() {
             let seconds = duration % 60;
             let minutes = Math.floor(duration / 60);
 
-            seconds = seconds < 10 ? "0"+seconds : seconds; // conditional operation for seconds
-            display.textContent = "0"+minutes+":"+seconds; // updating visual timer
+            seconds = seconds < 10 ? "0"+seconds : seconds; 
+            display.textContent = "0"+minutes+":"+seconds; 
             
             if(--duration < 0) { // interval ends once total time falls to 0
                 clearInterval(timer);
             }
+            if(menuBtn.addEventListener("click", () => clearTimer(timer))); // clears timer
         }, 1000);
     }
 
-    function countUpTimer() {
-        // function for timer that increments until game ends
+    function countUpTimer(duration, display) { // function for timer that increments until game ends
+        duration = 0;
+        let timer = setInterval(() => {
+            let seconds = duration % 60;
+            let minutes = Math.floor(duration / 60);
+
+            seconds = seconds < 10 ? "0"+seconds : seconds;
+            minutes = minutes < 10 ? "0"+minutes : minutes;
+
+            display.textContent = minutes+":"+seconds;
+            ++duration; // time increments by 1
+
+            if(menuBtn.addEventListener("click", () => clearInterval(timer))); // clears timer
+        }, 1000);
     }
 
     /* MAIN FUNCTION - Beginning of Program */
