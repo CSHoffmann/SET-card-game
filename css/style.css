@@ -80,6 +80,10 @@ h2 { /* default for all h2 elements */
     margin: 5px 0px;
 }
 
+.card:active { /* adds shadow when card is "selected" but I want to change this to make it more interactive with js */
+    box-shadow: 10px 10px #636363;
+}
+
 .shape-image {
     height: 85%;
 }
