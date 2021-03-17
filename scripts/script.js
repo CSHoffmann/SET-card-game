@@ -6,30 +6,39 @@ window.onload = function() {
     const menuBtn = document.getElementById("back");        // back to main menu button
     const startBtn = document.getElementById("start");      // start button
     const displayTime = document.getElementById("time");    // display for time in game view
+    const gameBoard = document.getElementById("game");      // game board
 
 
     /* FUNCTION DEFINITIONS */
     function game() {   //swapping visibility from menu to game by adding and removing a hidden class
         menuView.classList.add("hidden");
         gameView.classList.remove("hidden");
+
+        for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
+            var card = document.createElement("div"); 
+            card.classList.add("card"); 
+            gameBoard.appendChild(card); 
+        }
     }
 
     function menu() {   // swapping visibility from game to menu by adding and removing a hidden class
         gameView.classList.add("hidden");
         menuView.classList.remove("hidden");
+
+        gameBoard.textContent = ""; // hack that removes all child elements, probably not the best solution but will serve as temp solution
     }
 
-    function startTimer() {
-       let userTime = document.getElementById("dropdown").value; // user selected time as type string
+    function startTimer() { // starts timer based on user selected option
+       let userTime = document.getElementById("dropdown").value;
 
-       if (userTime == "none") { // case when user selects unlimted time 
+       if (userTime == "none") {
            countUpTimer(userTime, displayTime);
-       } else { // all other cases (user selects a finite time)
+       } else {
            countDownTimer(userTime, displayTime);
        }
     }
 
-    function countDownTimer(duration, display) {
+    function countDownTimer(duration, display) { // timer starts from given time and counts down to 0
         duration = parseInt(duration);
         let timer = setInterval(() => {
             let seconds = duration % 60;
@@ -41,11 +50,11 @@ window.onload = function() {
             if(--duration < 0) { // interval ends once total time falls to 0
                 clearInterval(timer);
             }
-            if(menuBtn.addEventListener("click", () => clearTimer(timer))); // clears timer
+            if(menuBtn.addEventListener("click", function() {clearInterval(timer)})); // clears timer
         }, 1000);
     }
 
-    function countUpTimer(duration, display) { // function for timer that increments until game ends
+    function countUpTimer(duration, display) { // timer starts at 0 and increments up indefinitely
         duration = 0;
         let timer = setInterval(() => {
             let seconds = duration % 60;
@@ -57,19 +66,13 @@ window.onload = function() {
             display.textContent = minutes+":"+seconds;
             ++duration; // time increments by 1
 
-            if(menuBtn.addEventListener("click", () => clearInterval(timer))); // clears timer
+            if(menuBtn.addEventListener("click", function() {clearInterval(timer)})); // clears timer
         }, 1000);
     }
 
     /* MAIN FUNCTION - Beginning of Program */
     function main() {
         startBtn.addEventListener("click", function() {
-            /* 
-            - when the start button is pressed, the set counter should equal 0, the timer should 
-            start based on the time selected and the view should change to game view
-            - set count is 0
-            - call timer function
-             */
             startTimer();
             game();
         })
