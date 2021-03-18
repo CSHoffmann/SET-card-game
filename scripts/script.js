@@ -10,10 +10,8 @@ window.onload = function() {
 
 
     /* FUNCTION DEFINITIONS */
-    function game() {   //swapping visibility from menu to game by adding and removing a hidden class
-        menuView.classList.add("hidden");
-        gameView.classList.remove("hidden");
-
+    function game() {
+        // generating cards
         for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
             var card = document.createElement("div"); 
             card.classList.add("card"); 
@@ -21,11 +19,13 @@ window.onload = function() {
         }
     }
 
-    function menu() {   // swapping visibility from game to menu by adding and removing a hidden class
-        gameView.classList.add("hidden");
-        menuView.classList.remove("hidden");
-
+    function menu() {   
         gameBoard.textContent = ""; // hack that removes all child elements, probably not the best solution but will serve as temp solution
+    }
+
+    function toggleView() { // toggling between game view and menu view with .hidden class
+        menuView.classList.toggle("hidden");
+        gameView.classList.toggle("hidden");
     }
 
     function startTimer() { // starts timer based on user selected option
@@ -75,10 +75,12 @@ window.onload = function() {
         startBtn.addEventListener("click", function() {
             startTimer();
             game();
+            toggleView();
         })
 
         menuBtn.addEventListener("click", function() {
             menu();
+            toggleView();
         })
     }
     
