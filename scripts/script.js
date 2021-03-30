@@ -8,6 +8,7 @@ window.onload = function() {
     const displayTime = document.getElementById("time");    // display for time in game view
     const gameBoard = document.getElementById("game");      // game board
 
+    
     /* EVENT LISTENERS */
     startBtn.addEventListener("click", function() {
         startTimer();
@@ -16,9 +17,10 @@ window.onload = function() {
     })
 
     menuBtn.addEventListener("click", function() {
-        menu();
+        gameBoard.textContent = ""; // removes all child elements, probably not the best solution but will serve as temp solution
         toggleView();
     })
+
 
     /* FUNCTION DEFINITIONS */
     /** Chooses which timer to start depending on user input */
@@ -90,15 +92,15 @@ window.onload = function() {
                 let randomStyle = parseInt(3 * Math.random());  
                 let randomShape = parseInt(3 * Math.random());
                 let randomColor = parseInt(3 * Math.random());
-    
+
                 // create new Card object and assign random properties
                 let newCard = new Card(STYLES[randomStyle], SHAPES[randomShape], COLORS[randomColor]);
-                temp.push(newCard); // add Card object to cardArray
+                temp.push(newCard); // add Card object to cardsArray
             }
             return temp;
         }
-        const cardArray = getRandomCards(); // cardArray is now an array of Card objects w/ random properties
-        
+        const cardsArray = getRandomCards(); // cardsArray is now an array of Card objects w/ random properties
+
         /** Creates DOM Elements and appends them to the gameBoard */
         for(let i = 0; i < 12; i++) {
 
@@ -107,32 +109,18 @@ window.onload = function() {
 
             let img = document.createElement("img"); // create new img element
             img.classList.add("card-image") // give element (img) class .card-image
-            img.src = cardArray[i].imgPath(); // add image source to my card object
+            img.src = cardsArray[i].imgPath(); // add image source to my card object
             
             card.appendChild(img); // append img to card
             gameBoard.appendChild(card); // append card to gameBoards
         }
 
-        /* let cardsArray = document.querySelectorAll(".card");
-        console.log(cardsArray)
-
-        cardsArray.forEach(element => {
+        /** Adds event listeners to each Card in the cardsArray */
+        /* cardsArray.forEach(element => {
             element.addEventListener("click", function() {
                 element.classList.toggle("selected");
             })
         }); */
-
-        /** Adds event listeners to each card */
-        /* for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
-            var card = document.createElement("div"); 
-            card.classList.add("card"); 
-            gameBoard.appendChild(card);  */
-        
-    }
-
-    /** Removes all cards from the game board */
-    function menu() {   
-        gameBoard.textContent = ""; // hack that removes all child elements, probably not the best solution but will serve as temp solution
     }
 
     /** Toggles between game view (the board with cards) and menu view (instructions, setting up time) */
@@ -141,7 +129,8 @@ window.onload = function() {
         gameView.classList.toggle("hidden");
     }
 
-    /** CLASS CARD - Constructor for Card objects */
+    
+    /** CLASS CARD DEFINITION - Class for Card objects. Card objects are constructed with 4 properties */
     class Card {
         constructor(style, shape, color, count) {
             this.style = style;
