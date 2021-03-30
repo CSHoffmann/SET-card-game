@@ -1,5 +1,5 @@
 window.onload = function() {
-    
+
     /* GLOBAL SCOPE VARIABLES */
     const menuView = document.getElementById("menu-view");  // main menu screen
     const gameView = document.getElementById("game-view");  // game screen
@@ -21,7 +21,8 @@ window.onload = function() {
     })
 
     /* FUNCTION DEFINITIONS */
-    function startTimer() { // starts timer based on user selected option
+    /** Chooses which timer to start depending on user input */
+    function startTimer() { 
        let userTime = document.getElementById("dropdown").value;
 
        if (userTime == "none") {
@@ -31,9 +32,10 @@ window.onload = function() {
        }
     }
 
+    /** Initalizes timer that starts at an inputted time and increments by -1. Stops when it reaches 00:00 */
     function countDownTimer(duration, display) { // timer starts from given time and counts down to 0
         duration = parseInt(duration);
-        let timer = setInterval(() => {
+        const timer = setInterval(() => {
             let seconds = duration % 60;
             let minutes = Math.floor(duration / 60);
 
@@ -43,10 +45,11 @@ window.onload = function() {
             if(--duration < 0) { // interval ends once total time falls to 0
                 clearInterval(timer);
             }
-            if(menuBtn.addEventListener("click", function() {clearInterval(timer)})); // clears timer
+            if(menuBtn.addEventListener("click", function() { clearInterval(timer) })); // clears timer
         }, 1000);
     }
 
+    /** Initializes timer, starts at 00:00 and increments by one second indefinately */
     function countUpTimer(duration, display) { // timer starts at 0 and increments up indefinitely
         duration = 0;
         let timer = setInterval(() => {
@@ -63,6 +66,7 @@ window.onload = function() {
         }, 1000);
     }
 
+    /** Function that generates cards on the board */
     function game() {
         // generating cards
         for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
@@ -72,11 +76,13 @@ window.onload = function() {
         }
     }
 
+    /** Removes all cards from the game board */
     function menu() {   
         gameBoard.textContent = ""; // hack that removes all child elements, probably not the best solution but will serve as temp solution
     }
 
-    function toggleView() { // toggling between game view and menu view with .hidden class
+    /** Toggles between game view (the board with cards) and menu view (instructions, setting up time) */
+    function toggleView() {
         menuView.classList.toggle("hidden");
         gameView.classList.toggle("hidden");
     }
