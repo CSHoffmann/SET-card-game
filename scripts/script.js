@@ -69,11 +69,43 @@ window.onload = function() {
     /** Function that generates cards on the board */
     function game() {
         // generating cards
-        for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
+
+        const STYLES = ["outline", "striped", "solid"]   // array of possible card STYLES
+        const SHAPES = ["diamond", "oval", "squiggle"]   // array of possible card SHAPES
+        const COLORS = ["green", "purple", "red"]        // array of possible card COLORS
+        const COUNT = [1, 2, 3]                          // array of possible card COUNTS (or amoung of cards)
+
+        class Card {
+            constructor(style, shape, color, count) {
+                this.style = style;
+                this.shape = shape;
+                this.color = color;
+                this.count = count;
+            }
+            imgPath() {
+                return "img/"+this.style+"-"+this.shape+"-"+this.color+".png"; // returns image path of Card
+            }
+        }
+
+        let myCard = new Card("solid", "oval", "green", 1) // create new card object
+        console.log(myCard);
+
+        var card = document.createElement("div"); // create new div element
+        card.classList.add("card"); // give div element (card) class .card
+
+        var img = document.createElement("img"); // create new img element
+        img.classList.add("card-image") // give element (img) class .card-image
+        img.src = myCard.imgPath(); // add image source to my card object
+        
+        card.appendChild(img); // append img to card
+        gameBoard.appendChild(card); // append card to gameBoard
+
+
+        /* for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
             var card = document.createElement("div"); 
             card.classList.add("card"); 
-            gameBoard.appendChild(card); 
-        }
+            gameBoard.appendChild(card);  */
+        
     }
 
     /** Removes all cards from the game board */
