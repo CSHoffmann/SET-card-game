@@ -1,5 +1,5 @@
 # Set Card Game
-This is a web app of the game Set developed with HTML, CSS and JavaScript.
+This is a web version of the card game Set developed with HTML, CSS and base JavaScript.
 
 # What is Set?
 Set is a pattern based card game where the player looks for three card combinations to form *sets*. 
