@@ -1,5 +1,5 @@
 window.onload = function() {
-
+    
     /* GLOBAL SCOPE VARIABLES */
     const menuView = document.getElementById("menu-view");  // main menu screen
     const gameView = document.getElementById("game-view");  // game screen
@@ -8,26 +8,19 @@ window.onload = function() {
     const displayTime = document.getElementById("time");    // display for time in game view
     const gameBoard = document.getElementById("game");      // game board
 
+    /* EVENT LISTENERS */
+    startBtn.addEventListener("click", function() {
+        startTimer();
+        game();
+        toggleView();
+    })
+
+    menuBtn.addEventListener("click", function() {
+        menu();
+        toggleView();
+    })
 
     /* FUNCTION DEFINITIONS */
-    function game() {
-        // generating cards
-        for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
-            var card = document.createElement("div"); 
-            card.classList.add("card"); 
-            gameBoard.appendChild(card); 
-        }
-    }
-
-    function menu() {   
-        gameBoard.textContent = ""; // hack that removes all child elements, probably not the best solution but will serve as temp solution
-    }
-
-    function toggleView() { // toggling between game view and menu view with .hidden class
-        menuView.classList.toggle("hidden");
-        gameView.classList.toggle("hidden");
-    }
-
     function startTimer() { // starts timer based on user selected option
        let userTime = document.getElementById("dropdown").value;
 
@@ -70,19 +63,21 @@ window.onload = function() {
         }, 1000);
     }
 
-    /* MAIN FUNCTION - Beginning of Program */
-    function main() {
-        startBtn.addEventListener("click", function() {
-            startTimer();
-            game();
-            toggleView();
-        })
-
-        menuBtn.addEventListener("click", function() {
-            menu();
-            toggleView();
-        })
+    function game() {
+        // generating cards
+        for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
+            var card = document.createElement("div"); 
+            card.classList.add("card"); 
+            gameBoard.appendChild(card); 
+        }
     }
-    
-    main();
+
+    function menu() {   
+        gameBoard.textContent = ""; // hack that removes all child elements, probably not the best solution but will serve as temp solution
+    }
+
+    function toggleView() { // toggling between game view and menu view with .hidden class
+        menuView.classList.toggle("hidden");
+        gameView.classList.toggle("hidden");
+    }
 }
