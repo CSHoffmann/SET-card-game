@@ -101,7 +101,10 @@ window.onload = function() {
         }
         const cardsArray = getRandomCards(); // cardsArray is now an array of Card objects w/ random properties
 
-        /** Creates DOM Elements and appends them to the gameBoard */
+        /** 
+         * Creates DOM Elements and appends them to the gameBoard
+         * Also assigns each div DOM element (card) to the specific Card objects .domElement property
+         */
         for(let i = 0; i < 12; i++) {
 
             let card = document.createElement("div"); // create new div element
@@ -110,10 +113,15 @@ window.onload = function() {
             let img = document.createElement("img"); // create new img element
             img.classList.add("card-image") // give element (img) class .card-image
             img.src = cardsArray[i].imgPath(); // add image source to my card object
-            
+
+            // adds the div DOM element (card) to object property .domElement. Now each object can reference the DOM element
+            cardsArray[i].domReference(card);
+            console.log(cardsArray[i].domElement);
+
             card.appendChild(img); // append img to card
             gameBoard.appendChild(card); // append card to gameBoards
         }
+        console.log(cardsArray)
 
         /** Adds event listeners to each Card in the cardsArray */
         /* cardsArray.forEach(element => {
@@ -137,9 +145,13 @@ window.onload = function() {
             this.shape = shape;
             this.color = color;
             this.count = count;
+            this.domElement;
         }
         imgPath() {
             return "img/"+this.style+"-"+this.shape+"-"+this.color+".png"; // returns image path of Card
+        }
+        domReference(element) {
+            this.domElement = element;
         }
     }
 }
