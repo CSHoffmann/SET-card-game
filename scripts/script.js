@@ -66,41 +66,63 @@ window.onload = function() {
         }, 1000);
     }
 
-    /** Function that generates cards on the board */
+    /**
+        * Function that generates cards on the board
+        * 1. Creat a new Card object with random properties
+        * 2. Create a new div element (card) and give it class .card and add event listener
+        * 3. Create a new img element (img) and give it class .card-img
+        * 4. Assign img.src to Card.imgPath()
+        * 5. Append img to card
+        * 6. Append card to gameBoard
+        */
     function game() {
-        // generating cards
-
         const STYLES = ["outline", "striped", "solid"]   // array of possible card STYLES
         const SHAPES = ["diamond", "oval", "squiggle"]   // array of possible card SHAPES
         const COLORS = ["green", "purple", "red"]        // array of possible card COLORS
-        const COUNT = [1, 2, 3]                          // array of possible card COUNTS (or amoung of cards)
+        const COUNT = [1, 2, 3]                          // array of possible card COUNTS (or amoung of cards)  
 
-        class Card {
-            constructor(style, shape, color, count) {
-                this.style = style;
-                this.shape = shape;
-                this.color = color;
-                this.count = count;
+        /** Returns an array of random Card objects */
+        function getRandomCards() {
+            let temp = [] // empty array
+
+            for(let i = 0; i < 12; i++) {
+                // three int variables with value randomly selected from range [1, 3]
+                let randomStyle = parseInt(3 * Math.random());  
+                let randomShape = parseInt(3 * Math.random());
+                let randomColor = parseInt(3 * Math.random());
+    
+                // create new Card object and assign random properties
+                let newCard = new Card(STYLES[randomStyle], SHAPES[randomShape], COLORS[randomColor]);
+                temp.push(newCard); // add Card object to cardArray
             }
-            imgPath() {
-                return "img/"+this.style+"-"+this.shape+"-"+this.color+".png"; // returns image path of Card
-            }
+            return temp;
+        }
+        const cardArray = getRandomCards(); // cardArray is now an array of Card objects w/ random properties
+        
+        /** Creates DOM Elements and appends them to the gameBoard */
+        for(let i = 0; i < 12; i++) {
+
+            let card = document.createElement("div"); // create new div element
+            card.classList.add("card"); // give div element (card) class .card
+
+            let img = document.createElement("img"); // create new img element
+            img.classList.add("card-image") // give element (img) class .card-image
+            img.src = cardArray[i].imgPath(); // add image source to my card object
+            
+            card.appendChild(img); // append img to card
+            gameBoard.appendChild(card); // append card to gameBoards
         }
 
-        let myCard = new Card("solid", "oval", "green", 1) // create new card object
-        console.log(myCard);
+        /* let cardsArray = document.querySelectorAll(".card");
+        console.log(cardsArray)
 
-        var card = document.createElement("div"); // create new div element
-        card.classList.add("card"); // give div element (card) class .card
+        cardsArray.forEach(element => {
+            element.addEventListener("click", function() {
+                element.classList.toggle("selected");
+            })
+        }); */
 
-        var img = document.createElement("img"); // create new img element
-        img.classList.add("card-image") // give element (img) class .card-image
-        img.src = myCard.imgPath(); // add image source to my card object
-        
-        card.appendChild(img); // append img to card
-        gameBoard.appendChild(card); // append card to gameBoard
-
-
+        /** Adds event listeners to each card */
         /* for(i = 0; i < 12; i++) { // creates 12 divs with class "card" and appends them to game board
             var card = document.createElement("div"); 
             card.classList.add("card"); 
@@ -117,5 +139,18 @@ window.onload = function() {
     function toggleView() {
         menuView.classList.toggle("hidden");
         gameView.classList.toggle("hidden");
+    }
+
+    /** CLASS CARD - Constructor for Card objects */
+    class Card {
+        constructor(style, shape, color, count) {
+            this.style = style;
+            this.shape = shape;
+            this.color = color;
+            this.count = count;
+        }
+        imgPath() {
+            return "img/"+this.style+"-"+this.shape+"-"+this.color+".png"; // returns image path of Card
+        }
     }
 }
