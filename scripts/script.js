@@ -35,7 +35,7 @@ window.onload = function() {
     }
 
     /** Initalizes timer that starts at an inputted time and increments by -1. Stops when it reaches 00:00 */
-    function countDownTimer(duration, display) { // timer starts from given time and counts down to 0
+    function countDownTimer(duration, display) {
         duration = parseInt(duration);
         const timer = setInterval(() => {
             let seconds = duration % 60;
@@ -96,7 +96,21 @@ window.onload = function() {
 
                 // create new Card object and assign random properties
                 let newCard = new Card(STYLES[randomStyle], SHAPES[randomShape], COLORS[randomColor], COUNT[randomCount]);
-                temp.push(newCard); // add Card object to cardsArray
+                temp.push(newCard); // add Card object to the end of temp
+                
+                /** 
+                 * Compares the newCard, which has just been pushed to the end of temp[] with the other
+                 * Card objects in the temp array. If newCard is equivalent to any of the existing Card
+                 * objects in the temp[] array, the it is poped out of the array and a newCard is generated
+                 * by reducing the outer iterator by 1
+                 * */
+                for(let x = 1; x < temp.length; x++) {
+                    if(JSON.stringify(newCard) == JSON.stringify(temp[x-1])) {
+                        temp.pop(newCard)
+                        i--;
+                        break;
+                    }
+                }  
             }
             return temp;
         }
@@ -125,6 +139,7 @@ window.onload = function() {
             gameBoard.appendChild(div);     // append card to gameBoards
         }
         console.log(cardsArray)
+        
 
         /** NEED TO ADD EVENT LISTENER TO EACH CARD ELEMENT (DIV) */
         /** Adds event listeners to each Card in the cardsArray */
