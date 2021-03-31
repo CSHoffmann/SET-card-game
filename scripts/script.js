@@ -64,7 +64,7 @@ window.onload = function() {
             display.textContent = minutes+":"+seconds;
             ++duration; // time increments by 1
 
-            if(menuBtn.addEventListener("click", function() {clearInterval(timer)})); // clears timer
+            if(menuBtn.addEventListener("click", function() { clearInterval(timer) })); // clears timer
         }, 1000);
     }
 
@@ -88,13 +88,14 @@ window.onload = function() {
             let temp = [] // empty array
 
             for(let i = 0; i < 12; i++) {
-                // three int variables with value randomly selected from range [1, 3]
+                // four variables <number> with a value randomly selected from range [1, 3]
                 let randomStyle = parseInt(3 * Math.random());  
                 let randomShape = parseInt(3 * Math.random());
                 let randomColor = parseInt(3 * Math.random());
+                let randomCount = parseInt(3 * Math.random());
 
                 // create new Card object and assign random properties
-                let newCard = new Card(STYLES[randomStyle], SHAPES[randomShape], COLORS[randomColor]);
+                let newCard = new Card(STYLES[randomStyle], SHAPES[randomShape], COLORS[randomColor], COUNT[randomCount]);
                 temp.push(newCard); // add Card object to cardsArray
             }
             return temp;
@@ -106,23 +107,26 @@ window.onload = function() {
          * Also assigns each div DOM element (card) to the specific Card objects .domElement property
          */
         for(let i = 0; i < 12; i++) {
+            let currentCard = cardsArray[i]; // assigned to current Card <object> from the cardsArray
 
-            let card = document.createElement("div"); // create new div element
-            card.classList.add("card"); // give div element (card) class .card
+            let div = document.createElement("div"); // create new div element
+            div.classList.add("card"); // give div element (card) class .card
 
-            let img = document.createElement("img"); // create new img element
-            img.classList.add("card-image") // give element (img) class .card-image
-            img.src = cardsArray[i].imgPath(); // add image source to my card object
+            /** creating a number of <img> elements equal to the Card's <object> count property */
+            for(let u = 0; u < currentCard.count; u++) { 
 
-            // adds the div DOM element (card) to object property .domElement. Now each object can reference the DOM element
-            cardsArray[i].domReference(card);
-            console.log(cardsArray[i].domElement);
+                let img = document.createElement("img");    // create new img element
+                img.classList.add("card-image")             // assign image with class .card-image
+                img.src = currentCard.imgPath()             // assign image.src = currentCard.imgPath()
+                div.appendChild(img);                       // append img to div
+            }
 
-            card.appendChild(img); // append img to card
-            gameBoard.appendChild(card); // append card to gameBoards
+            currentCard.domReference(div);  // assigns the div DOM element (div) to object property .domElement
+            gameBoard.appendChild(div);     // append card to gameBoards
         }
         console.log(cardsArray)
 
+        /** NEED TO ADD EVENT LISTENER TO EACH CARD ELEMENT (DIV) */
         /** Adds event listeners to each Card in the cardsArray */
         /* cardsArray.forEach(element => {
             element.addEventListener("click", function() {
