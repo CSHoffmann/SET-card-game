@@ -118,7 +118,7 @@ window.onload = function() {
 
         /** 
          * Creates DOM Elements and appends them to the gameBoard
-         * Also assigns each div DOM element (card) to the specific Card objects .domElement property
+         * Also assigns each div DOM element (card) to the specific Card <object> .domElement property
          */
         for(let i = 0; i < 12; i++) {
             let currentCard = cardsArray[i]; // assigned to current Card <object> from the cardsArray
@@ -126,7 +126,7 @@ window.onload = function() {
             let div = document.createElement("div"); // create new div element
             div.classList.add("card"); // give div element (card) class .card
 
-            /** creating a number of <img> elements equal to the Card's <object> count property */
+            /** creating a number of <img> elements equal to the Card <object> count property */
             for(let u = 0; u < currentCard.count; u++) { 
 
                 let img = document.createElement("img");    // create new img element
@@ -135,19 +135,16 @@ window.onload = function() {
                 div.appendChild(img);                       // append img to div
             }
 
-            currentCard.domReference(div);  // assigns the div DOM element (div) to object property .domElement
+            currentCard.domReference(div);  // assigns the div DOM element (div) to the Card <object> property .domElement
             gameBoard.appendChild(div);     // append card to gameBoards
         }
-        console.log(cardsArray)
-        
 
-        /** NEED TO ADD EVENT LISTENER TO EACH CARD ELEMENT (DIV) */
-        /** Adds event listeners to each Card in the cardsArray */
-        /* cardsArray.forEach(element => {
-            element.addEventListener("click", function() {
-                element.classList.toggle("selected");
+        /** Adds event listeners to each Card.domElement in the cardsArray */
+        cardsArray.forEach(element => {
+            element.domElement.addEventListener("click", function() {
+                element.domElement.classList.toggle("selected");
             })
-        }); */
+        }); 
     }
 
     /** Toggles between game view (the board with cards) and menu view (instructions, setting up time) */
