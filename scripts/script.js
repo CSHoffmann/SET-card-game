@@ -1,3 +1,20 @@
+/** CLASS CARD DEFINITION - Class for Card objects. Card objects are constructed with 4 properties */
+class Card {
+    constructor(style, shape, color, count) {
+        this.style = style;
+        this.shape = shape;
+        this.color = color;
+        this.count = count;
+        this.domElement;
+    }
+    imgPath() {
+        return "img/"+this.style+"-"+this.shape+"-"+this.color+".png"; // returns image path of Card
+    }
+    domReference(element) {
+        this.domElement = element;
+    }
+}
+
 window.onload = function() {
 
     /* GLOBAL SCOPE VARIABLES */
@@ -151,23 +168,5 @@ window.onload = function() {
     function toggleView() {
         menuView.classList.toggle("hidden");
         gameView.classList.toggle("hidden");
-    }
-
-    
-    /** CLASS CARD DEFINITION - Class for Card objects. Card objects are constructed with 4 properties */
-    class Card {
-        constructor(style, shape, color, count) {
-            this.style = style;
-            this.shape = shape;
-            this.color = color;
-            this.count = count;
-            this.domElement;
-        }
-        imgPath() {
-            return "img/"+this.style+"-"+this.shape+"-"+this.color+".png"; // returns image path of Card
-        }
-        domReference(element) {
-            this.domElement = element;
-        }
     }
 }
