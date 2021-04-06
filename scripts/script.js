@@ -132,6 +132,7 @@ window.onload = function() {
             return temp;
         }
         const cardsArray = getRandomCards(); // cardsArray is now an array of Card objects w/ random properties
+        console.log(cardsArray);
 
         /** 
          * Creates DOM Elements and appends them to the gameBoard
@@ -159,7 +160,14 @@ window.onload = function() {
         /** Adds event listeners to each Card.domElement in the cardsArray */
         cardsArray.forEach(element => {
             element.domElement.addEventListener("click", function() {
-                element.domElement.classList.toggle("selected");
+
+                element.domElement.classList.toggle("selected"); // adds selected class to the card
+                let selectedCards = document.querySelectorAll("div.card.selected"); // nodeList of div cards with class "selected"
+
+                if(selectedCards.length > 3) { // checks if you have more than three cards with selected class and removes the selected class on that card
+                    element.domElement.classList.toggle("selected"); 
+                    alert("Can only have three set cards selected at once");
+                }
             })
         }); 
     }
