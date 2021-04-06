@@ -24,6 +24,8 @@ window.onload = function() {
     const startBtn = document.getElementById("start");      // start button
     const displayTime = document.getElementById("time");    // display for time in game view
     const gameBoard = document.getElementById("game");      // game board
+    const setCount = document.getElementById("set-count");  // ui for displaying sets found
+    let sets = 0;                                           // keeps track of number of sets
 
     
     /* EVENT LISTENERS */
@@ -35,6 +37,8 @@ window.onload = function() {
 
     menuBtn.addEventListener("click", function() {
         gameBoard.textContent = ""; // removes all child elements, probably not the best solution but will serve as temp solution
+        setCount.textContent = 0;
+        sets = 0;
         toggleView();
     })
 
@@ -188,6 +192,7 @@ window.onload = function() {
 
         let points = 0;
 
+
         propertyEquivalency("style");
         propertyEquivalency("shape");
         propertyEquivalency("color");
@@ -197,6 +202,8 @@ window.onload = function() {
         
         if(points == 4) {
             alert("YOU FOUND A SET!");
+            sets += 1;
+            setCount.textContent = sets;
         }
         else {
             alert("Not a set");
