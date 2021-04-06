@@ -86,30 +86,36 @@ window.onload = function() {
     }
 
     /**
-        * Function that generates cards on the board
-        * 1. Creat a new Card object with random properties
-        * 2. Create a new div element (card) and give it class .card and add event listener
-        * 3. Create a new img element (img) and give it class .card-img
-        * 4. Assign img.src to Card.imgPath()
-        * 5. Append img to card
-        * 6. Append card to gameBoard
-        */
+     * Finds 12 random, unique (no card has the same four attributes) set cards and appends them to the game board.
+     * Also adds event listeners for each set card.
+     */
     function game() {
         const STYLES = ["outline", "striped", "solid"]   // array of possible card STYLES
         const SHAPES = ["diamond", "oval", "squiggle"]   // array of possible card SHAPES
         const COLORS = ["green", "purple", "red"]        // array of possible card COLORS
         const COUNT = [1, 2, 3]                          // array of possible card COUNTS (or amoung of cards)  
+        var maxCards = 0;                                // global var that controls number of cards generated, based on difficulty
+
+        let difficulty = document.querySelector("input[name='diff']:checked").value;    // input that decides difficulty of the game
+        if(difficulty == "standard") {
+            maxCards = 12;
+        } else {
+            maxCards = 9;
+        }
 
         /** Returns an array of random Card objects */
         function getRandomCards() {
             let temp = [] // empty array
 
-            for(let i = 0; i < 12; i++) {
+            for(let i = 0; i < maxCards; i++) {
                 // four variables <number> with a value randomly selected from range [1, 3]
-                let randomStyle = parseInt(3 * Math.random());  
+                let randomStyle = parseInt(3 * Math.random());
                 let randomShape = parseInt(3 * Math.random());
                 let randomColor = parseInt(3 * Math.random());
                 let randomCount = parseInt(3 * Math.random());
+
+                // sets Card.style to solid if easy difficulty is chosen (9 cards generated)
+                if(maxCards == 9) { randomStyle = 2; } 
 
                 // create new Card object and assign random properties
                 let newCard = new Card(STYLES[randomStyle], SHAPES[randomShape], COLORS[randomColor], COUNT[randomCount]);
@@ -138,7 +144,7 @@ window.onload = function() {
          * Creates DOM Elements and appends them to the gameBoard
          * Also assigns each div DOM element (card) to the specific Card <object> .domElement property
          */
-        for(let i = 0; i < 12; i++) {
+        for(let i = 0; i < maxCards; i++) {
             let currentCard = cardsArray[i]; // assigned to current Card <object> from the cardsArray
 
             let div = document.createElement("div"); // create new div element
