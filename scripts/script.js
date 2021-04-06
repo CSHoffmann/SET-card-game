@@ -168,8 +168,15 @@ window.onload = function() {
                     element.domElement.classList.toggle("selected"); 
                     alert("Can only have three set cards selected at once");
                 }
+                checkForSet(element); // will call checkForSet() and pass the Card object (stored in element) as an argument
             })
         }); 
+    }
+
+    // Function that checks for Set
+    function checkForSet(cardObj) {
+        console.log(cardObj);
+
     }
 
     /** Toggles between game view (the board with cards) and menu view (instructions, setting up time) */
