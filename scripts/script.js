@@ -170,19 +170,49 @@ window.onload = function() {
                 element.domElement.classList.toggle("selected"); // adds selected class to the card
                 let selectedCards = document.querySelectorAll("div.card.selected"); // nodeList of div cards with class "selected"
 
+                if(selectedCards.length == 3) {
+                    checkForSet(cardsArray); // will call checkForSet() and pass the Card object (stored in element) as an argument
+                }
                 if(selectedCards.length > 3) { // checks if you have more than three cards with selected class and removes the selected class on that card
                     element.domElement.classList.toggle("selected"); 
                     alert("Can only have three set cards selected at once");
                 }
-                checkForSet(element); // will call checkForSet() and pass the Card object (stored in element) as an argument
             })
         }); 
     }
 
     // Function that checks for Set
-    function checkForSet(cardObj) {
-        console.log(cardObj);
+    function checkForSet(cardsArray) {
+        let cards = cardsArray.filter(word => word.domElement.classList.contains("selected")); // array of objects contained divs with "selected" class
+        console.log(cards)
 
+        let points = 0;
+
+        propertyEquivalency("style");
+        propertyEquivalency("shape");
+        propertyEquivalency("color");
+        propertyEquivalency("count");
+
+        console.log(points);
+        
+        if(points == 4) {
+            alert("YOU FOUND A SET!");
+        }
+        else {
+            alert("Not a set");
+        }
+
+        function propertyEquivalency(property) {
+            if(cards[0][property] == cards[1][property] && cards[0][property] == cards[2][property]) { // property is the same between the cards
+                points += 1;
+                alert(property + ": is the same");
+            } else if(cards[0][property] != cards[1][property] && cards[0][property] != cards[2][property] && cards[1][property] != cards[2][property]) { // property is all different (unique) between the cards
+                points += 1;
+                alert(property + ": is unique")
+            } else {
+                alert(property + ": not viable for set")
+            }
+        }
     }
 
     /** Toggles between game view (the board with cards) and menu view (instructions, setting up time) */
