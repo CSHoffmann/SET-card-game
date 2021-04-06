@@ -185,21 +185,17 @@ window.onload = function() {
         }); 
     }
 
-    // Function that checks for Set
+    /** Checks to see if the three selected cards create a set*/
     function checkForSet(cardsArray) {
-        let cards = cardsArray.filter(word => word.domElement.classList.contains("selected")); // array of objects contained divs with "selected" class
-        console.log(cards)
+        const properties = ["style", "shape", "color", "count"]; // string[] that contains property names for Card objects
+        let cards = cardsArray.filter(word => word.domElement.classList.contains("selected")); // array of Card objects that are selected
+        let points = 0; // used to figure out if a set has been found (4 points for set)
 
-        let points = 0;
+        for(let i = 0; i < properties.length; i++) { // adds the total amount of points
+            points += propertyEquivalency(properties[i]);
+        }
 
-
-        propertyEquivalency("style");
-        propertyEquivalency("shape");
-        propertyEquivalency("color");
-        propertyEquivalency("count");
-
-        console.log(points);
-        
+        /** checks whether a set has been found */
         if(points == 4) {
             alert("YOU FOUND A SET!");
             sets += 1;
@@ -209,15 +205,14 @@ window.onload = function() {
             alert("Not a set");
         }
 
+        /** Returns a 1 if property for all cards is either the same, or unique (different for all three) */
         function propertyEquivalency(property) {
-            if(cards[0][property] == cards[1][property] && cards[0][property] == cards[2][property]) { // property is the same between the cards
-                points += 1;
-                alert(property + ": is the same");
-            } else if(cards[0][property] != cards[1][property] && cards[0][property] != cards[2][property] && cards[1][property] != cards[2][property]) { // property is all different (unique) between the cards
-                points += 1;
-                alert(property + ": is unique")
+            if(cards[0][property] == cards[1][property] && cards[0][property] == cards[2][property]) {
+                return 1;
+            } else if(cards[0][property] != cards[1][property] && cards[0][property] != cards[2][property] && cards[1][property] != cards[2][property]) {
+                return 1;
             } else {
-                alert(property + ": not viable for set")
+                return 0;
             }
         }
     }
