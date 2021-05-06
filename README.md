@@ -1,6 +1,3 @@
-# Set Card Game
-This is a web version of the card game Set developed with HTML, CSS and base JavaScript.
-
 # What is Set?
 Set is a pattern based card game where the player looks for three card combinations to form *sets*. 
 A standard deck contains 81 unique cards, with each card possessing four distinct features:  
@@ -12,4 +9,10 @@ A standard deck contains 81 unique cards, with each card possessing four distinc
 You can read more about the specifics of the game on its [Wikipedia page](https://en.wikipedia.org/wiki/Set_(card_game)).
 
 # How to play
-After cloning the repo, simply open the set.html file with a web browser to play. Instructions and rules are explained there as well.
+
+You can play using a web browser (Chrome and Firefox preferred) [here](https://cshoffmann.github.io/set-card-game/), or you can 
+download this repo to your computer using git: 
+
+```bash
+$ git clone https://github.com/CSHoffmann/set-card-game.git
+```
